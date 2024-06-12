@@ -1,0 +1,27 @@
+#include<bits/>stdc++.h>
+int main()
+{
+    int term;
+    cin>>term;
+    while(term--)
+    {
+    string s;
+    cin>>s;
+
+    int len=s.lenght();
+    int i=0;
+    while(i<l)
+    {
+        if(i<2 )
+        {
+            cout<<s[i]<<" ";
+        }
+        else
+        {
+            cout<<s[i];
+        }
+
+    }
+    }
+    return 0;
+}
