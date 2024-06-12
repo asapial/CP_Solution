@@ -1,47 +1,43 @@
-#include <iostream>
-#include <unordered_map>
-
+#include <bits/stdc++.h>
 using namespace std;
+#define   Pi     2*acos(0.0)
+#define   ll     long long
+#define   pb     push_back
+#define   mp     make_pair
+#define   MAX    500006
+#define   MAX1   10000008
+#define   mem(a,v)   memset(a,v,sizeof(a))
+#define   lcm(a, b)        ((a)*((b)/__gcd(a,b)))
+void solve(){
 
-int countGoodPrefixes(int arr[], int n) {
-    int count = 0;
-    unordered_map<int, int> prefixSum;
+ll n;
+cin>>n;
 
-    // A prefix can be good only if its sum is 0.
-    // Initialize prefixSum[0] to 1 to count the empty prefix.
-    prefixSum[0] = 1;
+ll sum=0,maxi=0;
 
-    int currentSum = 0;
-    for (int i = 0; i < n; i++) {
-        currentSum += arr[i];
-
-        // Check if a good prefix exists for subtraction (sum = 0)
-        count += prefixSum.count(currentSum) ? prefixSum[currentSum] : 0;
-
-        // Update count for prefix sum ONLY if the prefix before adding current element is good
-        if (prefixSum.count(currentSum - arr[i]) > 0) {
-            prefixSum[currentSum - arr[i]]++;
-        }
+ll num;
+ll ans=0;
+for(int i=0;i<n;i++)
+{
+    cin>>num;
+    sum+=num;
+    maxi=max(maxi,num);
+    if(sum-maxi==maxi)
+    {
+        ans++;
     }
 
-    return count;
 }
 
-int main() {
-    int t;
-    cin >> t;
+cout<<ans<<endl;
+}
 
-    while (t--) {
-        int n;
-        cin >> n;
+int main(){
 
-        int arr[n];
-        for (int i = 0; i < n; i++) {
-            cin >> arr[i];
-        }
-
-        cout << countGoodPrefixes(arr, n) << endl;
-    }
-
-    return 0;
+int t;
+cin>>t;
+while(t--){
+solve();
+}
+return 0;
 }
