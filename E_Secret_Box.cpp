@@ -27,33 +27,29 @@ template <typename T, typename V> void operator*=(vector<T>& a, const V value) {
 template <typename T, typename V> void operator/=(vector<T>& a, const V value) { for(auto &x : a)x /= value; }
 template <typename T> void operator++(vector<T>& a) { a += 1; }
 template <typename T> void operator--(vector<T>& a) { a -= 1; }
+void solve(){
 
 
-void solve() {
-    int x, y, z;
-    ll k;
-    cin >> x >> y >> z >> k;
+ll x,y,z,k;
+cin>>x>>y>>z>>k;
 
-    int maxi = 0;
+ll ans=0;
 
-    for (int a = 1; a <= x; ++a) {
-        if (k % a == 0) {
-            ll rem = k / a;
-            for (int b = 1; b <= y; ++b) {
-                if (rem % b == 0) {
-                    int c = rem / b;
-                    if (c <= z) {
-                       
-                        int positions = (x - a + 1) * (y - b + 1) * (z - c + 1);
-                        maxi = max(maxi, positions);
-                    }
-                }
-            }
-        }
+
+for(int a=1;a<=x;a++)
+{
+    for(int b=1;b<=y;b++)
+    {   
+        if(k%(a*b))continue;
+        ll c=k/(a*b);
+        if(c>z) continue;
+
+        ll permutation=(ll)(x-a+1)*(y-b+1)*(z-c+1);
+        ans=maxl(ans,permutation);
     }
+}
 
-    cout << maxi << endl;
-
+cout<<ans<<endl;
 
 return ;
 }
