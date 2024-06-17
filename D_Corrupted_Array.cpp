@@ -29,17 +29,63 @@ template <typename T> void operator++(vector<T>& a) { a += 1; }
 template <typename T> void operator--(vector<T>& a) { a -= 1; }
 void solve(){
 
-int n;
+ll n;
 cin>>n;
-vector<int>a(n+2);
+vector<ll>a(n+2);
 
 ll sum=0;
 
-for(int i=0;i<n+2;i++)
+for(ll i=0;i<n+2;i++)
 {
     cin>>a[i];
     sum+=a[i];
 }
+
+
+sort(all(a));
+
+
+
+ll index=-1;
+
+sum-=a[n+1];
+
+for(ll i=0;i<n+1;i++)
+{
+    if(sum-a[i]==a[n+1])
+    {
+        index=i;break;
+    }
+}
+
+if(index==-1)
+{
+    if(sum-a[n]==a[n])
+    {
+        for(ll i=0;i<n;i++)
+        {
+            cout<<a[i]<<" ";
+        }
+        cout<<endl;
+    }
+    else
+    {
+        cout<<-1<<endl;
+    }
+}
+else
+{
+    for(ll i=0;i<n+1;i++)
+    {
+        if(index!=i)
+        {
+            cout<<a[i]<<" ";
+        }
+    }
+    cout<<endl;
+}
+
+
 
 
 return ;
@@ -56,3 +102,7 @@ solve();
 }
 return 0;
 }
+
+// 2 2 3 7 12
+
+// 14
