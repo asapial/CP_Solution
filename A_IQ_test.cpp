@@ -11,47 +11,34 @@ using namespace std;
 void solve(){
 
 
+
 }
 
 int main(){
-vector<bool>check(1000006,false);
 
-for(int i=2;i<1000006;i++)
-{   
-    if(check[i]==false)
-    {
-    for(int j=2;i*j<1000006;j++)
-    {
-        check[i*j]=true;
-    }
-    }
-}
-
-
-ll n;
+int n;
 cin>>n;
+
+int odd_count=0,even_count=0,odd_index=0,even_index=0;
+
 
 for(int i=0;i<n;i++)
 {
-    ll num;
+    int num;
     cin>>num;
 
-    ll s=sqrt(num);
+    (num%2?odd_count++:even_count++);
+    (num%2?odd_index=i+1:even_index=i+1);
 
-    if(num==1)
-    {
-        cout<<"NO"<<endl;
 
-    }
-    else if(s*s==num and check[s]==false)
+}
+    if(odd_count==1)
     {
-        cout<<"YES"<<endl;
+        cout<<odd_index<<endl;
     }
     else
     {
-        cout<<"NO"<<endl;
+        cout<<even_index<<endl;
     }
-
-}
 return 0;
 }
