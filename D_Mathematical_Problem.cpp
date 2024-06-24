@@ -33,51 +33,13 @@ int rendere(char a,char b)
     return ((a-'0')*10)+(b-'0');
 }
 
-int sum(int l,int r)
-{
-    int ans=0;
-    //
-
-    for(int i=l;i<=r;i++)
-    {
-        if((s[i]=='1' and s[i+1]=='2') or (s[i]=='2' and s[i+1]=='1'))
-        {
-            ans+=2;
-            i+=2;
-        }
-        else
-        {
-            ans+=s[i]-'0';
-        }
-    }
-    int mini=INT_MAX;
-    for(int i=l;i<r;i++)
-    {
-        if(rendere(s[i],s[i+1])<mini)
-        {   
-            if(mini!=INT_MAX)
-            {
-                ans-=mini;
-                ans+=mini%10;
-                ans+=mini/10;
-            }
-            ans-=s[i]-'0';
-            ans-=s[i+1]-'0';
-            ans+=rendere(s[i],s[i+1]);
-            mini=rendere(s[i],s[i+1]);
-        }
-    }
-
-    
-    return ans;
-}
 void solve(){
 
 int n;
 
 cin>>n>>s;
 
-if((s[0]=='0' and n!=2) or s.find("00")!=string::npos)
+if((count(all(s),'0')>0 and n>3))
 {
     cout<<0<<endl;
     return;
@@ -96,24 +58,28 @@ else
     }
     else
     {   
-        int suma=INT_MAX;
-        int l=0;
-        for(int i=0;i<n;i++)
+        int ans=INT_MAX;
+
+        int it1=0,it2=1;
+
+        while(it2<n)
         {
-            if(s[i]=='0')
+            int sum=0;
+
+            for(int i=0;i<n;i++)
             {
-                suma=min(suma,sum(l,i));
-                l=i;
+                if(i!=it1 and i!=it2 and s[i]!='1')
+                {
+                    sum+=s[i]-'0';
+                }
             }
+
+            ans=min(ans,(sum+(rendere(s[it1],s[it2]))));
+            it1++;
+            it2++;
         }
 
-        if(l!=n-1)
-        {
-                            suma=min(suma,sum(l,n-1));
-
-        }
-
-        cout<<suma<<endl;
+        cout<<ans<<endl;
     }
 
 }
