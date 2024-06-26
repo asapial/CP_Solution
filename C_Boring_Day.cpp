@@ -46,13 +46,9 @@ for(int i=0;i<n;i++)
 
 int ans=0;
 
-for(int i=0;i<n+1;i++)
-{
-    int j=i+1;
+int i=0,j=i+1;
 
-    if(b[j]-)
-}
-cout<<ans<<endl;
+
 return ;
 }
 bool test=1;
