@@ -27,99 +27,32 @@ template <typename T, typename V> void operator*=(vector<T>& a, const V value) {
 template <typename T, typename V> void operator/=(vector<T>& a, const V value) { for(auto &x : a)x /= value; }
 template <typename T> void operator++(vector<T>& a) { a += 1; }
 template <typename T> void operator--(vector<T>& a) { a -= 1; }
-string s;
-int rendere(char a,char b)
-{
-    return ((a-'0')*10)+(b-'0');
-}
-
-int sum(int l,int r)
-{
-    int ans=0;
-    //
-
-    for(int i=l;i<=r;i++)
-    {
-        if((s[i]=='1' and s[i+1]=='2') or (s[i]=='2' and s[i+1]=='1'))
-        {
-            ans+=2;
-            i+=2;
-        }
-        else
-        {
-             ans+=s[i]-'0';
-        }
-    }
-    int mini=INT_MAX;
-    for(int i=l;i<r;i++)
-    {
-        if(rendere(s[i],s[i+1])<mini)
-        {   
-            if(mini!=INT_MAX)
-            {
-                ans-=mini;
-                ans+=mini%10;
-                ans+=mini/10;
-            }
-            ans-=s[i]-'0';
-            ans-=s[i+1]-'0';
-            ans+=rendere(s[i],s[i+1]);
-            mini=rendere(s[i],s[i+1]);
-        }
-    }
-
-    
-    return ans;
-}
 void solve(){
 
-int n;
 
-cin>>n>>s;
+int n,l,r;
+cin>>n>>l>>r;
 
-if((s[0]=='0' and n!=2) or s.find("00")!=string::npos)
+vector<int>a(n);
+
+cin>>a;
+
+vector<int>b(n+1);
+b[0]=0;
+for(int i=0;i<n;i++)
 {
-    cout<<0<<endl;
-    return;
-}
-else
-{
-    if(n==2)
-    {
-        cout<<rendere(s[0],s[1])<<endl;
-        return;
-    }
-    else if(n==3)
-    {
-        cout<<min({rendere(s[0],s[1])+s[2]-'0',s[0]-'0'+rendere(s[1],s[2]),rendere(s[0],s[1])*(s[2]-'0'),(s[0]-'0')*rendere(s[1],s[2])})<<endl;
-        return;
-    }
-    else
-    {   
-        int suma=INT_MAX;
-        int l=0;
-        for(int i=0;i<n;i++)
-        {
-            if(s[i]=='0')
-            {
-                suma=min(suma,sum(l,i));
-                l=i;
-            }
-        }
-
-        if(l!=n-1)
-        {
-                            suma=min(suma,sum(l,n-1));
-
-        }
-
-        cout<<suma<<endl;
-    }
-
+    b[i+1]=b[i]+a[i];
 }
 
+int ans=0;
 
+for(int i=0;i<n+1;i++)
+{
+    int j=i+1;
 
+    if(b[j]-)
+}
+cout<<ans<<endl;
 return ;
 }
 bool test=1;
