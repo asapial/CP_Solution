@@ -10,18 +10,26 @@ using namespace std;
 #define   lcm(a, b)        ((a)*((b)/__gcd(a,b)))
 void solve(){
 
-ll a,b,c,d;
-cin>>a>>b>>c>>d;
+ll x,y,k;
+cin>>x>>y>>k;
 
-if((a<b and c<d) or (a>b and c>d))
-{
-    cout<<"YES"<<endl;
 
-}
-else
-{
-    cout<<"NO"<<endl;
-}
+
+    while(x>1 and k)
+    {
+        ll add=min(k,y-x%y);
+        k-=add;
+        x+=add;
+        while (x%y==0)
+        {
+            x/=y;
+        }
+        
+
+    }
+
+
+cout<<x+(k%(y-1))<<endl;
 }
 
 int main(){
