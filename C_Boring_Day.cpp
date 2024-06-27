@@ -29,26 +29,45 @@ template <typename T> void operator++(vector<T>& a) { a += 1; }
 template <typename T> void operator--(vector<T>& a) { a -= 1; }
 void solve(){
 
-
-int n,l,r;
+ll n,l,r;
 cin>>n>>l>>r;
 
-vector<int>a(n);
+vector<ll>a(n);
 
-cin>>a;
-
-vector<int>b(n+1);
-b[0]=0;
 for(int i=0;i<n;i++)
 {
-    b[i+1]=b[i]+a[i];
+    cin>>a[i];
 }
 
+
+int s=0,f=0;
 int ans=0;
+ll sum=0;
+while(s<n)
+{
+    while(f<n and sum<l)
+    {   
+        sum+=a[f];
+        f++;
+        
+    }
 
-int i=0,j=i+1;
+    if(l<=sum and sum<=r)
+    {
+        ans++;
+        s=f;
+        sum=0;
+    }
+    else
+    {
+        sum-=a[s];
+        s++;
+    }
+
+}
 
 
+cout<<ans<<endl;
 return ;
 }
 bool test=1;
