@@ -8,41 +8,16 @@ using namespace std;
 #define   MAX1   10000008
 #define   mem(a,v)   memset(a,v,sizeof(a))
 #define   lcm(a, b)        ((a)*((b)/__gcd(a,b)))
-#define   debug(x) cout<<#x<<" "<<x<<endl;
 void solve(){
-string a,b;
-cin>>a>>b;
 
-
-int n=a.size();
-int m=b.size();
-
-int ans=n+m;
-
-
-for(int i=0;i<m;i++)
-{   int match=i;
-
-    for(int j=0;j<n;j++)
-    {
-        if(match<m and a[j]==b[match])
-        {
-            match++;
-        }
-    }
-
-    // debug(match);
-    ans=min(ans,n+m-(match-i));
-}
-
-cout<<ans<<endl;
-
+ll n,m;cin>>n>>m;
+	cout<<m*(n/m)*(n/m-1)/2+(n%m)*(n/m)<<" "<<(n-m+1)*(n-m)/2;
 }
 
 int main(){
 
 int t;
-cin>>t;
+t=1;
 while(t--){
 solve();
 }

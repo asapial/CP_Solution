@@ -31,140 +31,49 @@ void solve(){
 
 int n;
 cin>>n;
-vector<int>a(n),b(n);
-
+vector<int>a(n);
 cin>>a;
-cin>>b;
 
-int sum_a=0,sum_b=0;
-int crunch_a
+int maxi=*max_element(all(a));
 
-for(int i=0;i<n;i++)
+multiset<int>s;
+
+for(int i=1;i<n;i++)
 {
-    if(a[i]==b[i])
+    if(a[i]<a[i-1])
     {
-        if(a[i]==1)
-        {
-            if(sum_a<=sum_b)
-            {
-                sum_a++;
-            }
-            else
-            {
-                sum_b++;
-            }
-        }
-        else if(a[i]==-1)
-        {
-            if(sum_a<=sum_b)
-            {
-                sum_b--;
-            }
-            else
-            {
-                sum_a--;
-            }
-         
-        }
+        s.insert(a[i-1]-a[i]);
+        a[i]=a[i-1];
     }
-    else
-    {
-        if(a[i]==0 and b[i]==1)
-        {
-            if(sum_a<sum_b)
-            {
-                sum_a+=0;
-            }
-            else if(sum_a>sum_b)
-            {
-                sum_b++;
-            }
-            else
-            {
-                sum_a+=0;
-            }
-        }
-        else if(a[i]==0 and b[i]==-1)
-        {
-             if(sum_a<sum_b)
-            {
-                sum_b--;
-            }
-            else if(sum_a>sum_b)
-            {
-                sum_a+=0;
-            }
-            else
-            {
-                sum_a+=0;
-            }
 
-        }
-        else if(a[i]==1 and b[i]==0)
-        {
-             if(sum_a<sum_b)
-            {
-                sum_a++;
-            }
-            else if(sum_a>sum_b)
-            {
-                sum_b+=0;
-            }
-            else
-            {
-                sum_b+=0;
-            }
-        }
-        else if(a[i]==1 and b[i]==-1)
-        {
-             if(sum_a<sum_b)
-            {
-                sum_b--;
-            }
-            else if(sum_a>sum_b)
-            {
-                sum_b--;
-            }
-            else
-            {
-                sum_b--;
-            }
-        }
-        else if(a[i]==-1 and b[i]==1)
-        {
-             if(sum_a<sum_b)
-            {
-                sum_b++;
-            }
-            else if(sum_a>sum_b)
-            {
-                sum_a--;
-            }
-            else
-            {
-                sum_b++;
-            }
-        }
-        else if(a[i]==-1 and b[i]==0)
-        {
-             if(sum_a<sum_b)
-            {
-                sum_b+=0;
-            }
-            else if(sum_a>sum_b)
-            {
-                sum_a--;
-            }
-            else
-            {
-                sum_b+=0;
-            }
-        }
-        
-    }
 }
 
-cout<<min(sum_a,sum_b)<<endl;
+vector<int>ans;
+
+if(s.size()==0)
+{
+    cout<<0<<endl;
+    return;
+}
+else
+{
+    for(auto x:s)
+    {
+        ans.push_back(x);
+    }
+
+    ll sum=0;
+
+    sum+=ans[0]*(ans.size()+1);
+
+    for(int i=1;i<ans.size();i++)
+    {
+        sum+=(ans[i]-ans[i-1])*(ans.size()-i+1);
+    }
+
+    cout<<sum<<endl;
+    return;
+}
 
 return ;
 }
