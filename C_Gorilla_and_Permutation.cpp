@@ -29,54 +29,50 @@ template <typename T> void operator++(vector<T>& a) { a += 1; }
 template <typename T> void operator--(vector<T>& a) { a -= 1; }
 void solve(){
 
+int n,m,k;
+cin>>n>>m>>k;
 
-ll n,k,x;
-cin>>n>>k>>x;
-vector<ll>a(n);
+map<int,int>a;
 
-cin>>a;
 
-sort(a.begin(),a.end());
-
-int count_MTX=0;
-
-vector<ll>ans;
-for(int i=1;i<n;i++)
-{   ll d=a[i]-a[i-1];
-    if(d>x)
-    {
-        ans.push_back(d);
-    }
-}
-
-sort(ans.begin(),ans.end());
-ll i;
-for( i=0;i<ans.size();i++)
+for(int i=1;i<=n;i++)
 {
-    ll need=((ans[i]-1)/x);
-    if(need<=k)
-    {
-        k-=need;
-    }
-    else{
-        i--;
-        break;
-    }
+    a[i]++;
 }
 
-if(i==a.size()-1)
+vector<int>ans;
+
+for(int i=n;i>=k;i--)
 {
-    cout<<1<<endl;
-    return;
+    if(a[i])
+    {
+        ans.push_back(i);
+        a[i]--;
+    }
 }
 
-cout<<maxl(ans.size()-i,1)<<endl;
+for(int i=m+1;i<=n;i++)
+{
+    if(a[i])
+    {
+        ans.push_back(i);
+        a[i]--;
+    }
+}
 
+for(int i=1;i<=m;i++)
+{
+    if(a[i])
+    {
+        ans.push_back(i);
+        a[i]--;
+    }
+}
 
-
+cout<<ans<<endl;
 return ;
 }
-bool test=0;
+bool test=1;
 int main(){
 ios::sync_with_stdio(0);
 cin.tie(0);

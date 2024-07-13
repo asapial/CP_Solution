@@ -29,54 +29,78 @@ template <typename T> void operator++(vector<T>& a) { a += 1; }
 template <typename T> void operator--(vector<T>& a) { a -= 1; }
 void solve(){
 
+int n,m,k;
+cin>>n>>m>>k;
 
-ll n,k,x;
-cin>>n>>k>>x;
-vector<ll>a(n);
+string s;
+cin>>s;
 
-cin>>a;
+s="L"+s;
+s=s+"L";
 
-sort(a.begin(),a.end());
-
-int count_MTX=0;
-
-vector<ll>ans;
-for(int i=1;i<n;i++)
-{   ll d=a[i]-a[i-1];
-    if(d>x)
-    {
-        ans.push_back(d);
-    }
-}
-
-sort(ans.begin(),ans.end());
-ll i;
-for( i=0;i<ans.size();i++)
+int i=0;
+while(i<n+2)
 {
-    ll need=((ans[i]-1)/x);
-    if(need<=k)
+    if(s[i+1]=='L')
     {
-        k-=need;
+        i++;
     }
-    else{
-        i--;
-        break;
+    else
+    {
+        int dis=i+1;
+
+        while(s[dis]!='L')
+        {
+            dis++;
+        }
+        
+        // cout<<"Values of dis "<<dis<<endl;
+
+        if(dis<=i+m)
+        {
+            i=dis;
+        }
+        else
+        {
+            int check=i+m;
+            if(s[check]!='C')
+            {
+                for(int j=check;j<dis;j++)
+                {
+                    if(s[j]=='C')
+                    {
+                        cout<<"NO"<<endl;
+                        return;
+                    }
+                    if(k<=0)
+                    {
+                        cout<<"NO"<<endl;
+                        return;
+                    }
+                    k--;
+                }
+            }
+            else{
+                cout<<"NO"<<endl;
+                return;
+            }
+            i=dis;
+        }
+
+    }
+    if(i==n+1)
+    {
+        cout<<"YES"<<endl;
+        return;
     }
 }
 
-if(i==a.size()-1)
-{
-    cout<<1<<endl;
-    return;
-}
-
-cout<<maxl(ans.size()-i,1)<<endl;
-
+cout<<"YES"<<endl;
 
 
 return ;
 }
-bool test=0;
+bool test=1;
 int main(){
 ios::sync_with_stdio(0);
 cin.tie(0);
