@@ -1,103 +1,69 @@
 #include <bits/stdc++.h>
-#include <ext/pb_ds/assoc_container.hpp>
-#include <ext/pb_ds/tree_policy.hpp>
 using namespace std;
-using namespace __gnu_pbds;
-typedef long long ll;
-#define sync_clock chrono::steady_clock::now().time_since_epoch().count()
-#define all(x)     (x).begin(), (x).end()
-#define rall(x)    (x).rbegin(),(x).rend()
-ll minl(ll a,ll b){return (a>b?b:a);}
-ll maxl(ll a,ll b){return (a<b?b:a);}
-template<typename T> struct split64_hash { inline static uint64_t splitmix64(uint64_t x){
-x = ((x += 0x9e3779b97f4a7c15) ^ ((x += 0x9e3779b97f4a7c15) >> 30)) * 0xbf58476d1ce4e5b9;
-return ((x ^ (x >> 27)) * 0x94d049bb133111eb) ^ (((x ^ (x >> 27)) * 0x94d049bb133111eb) >> 31);
-} inline size_t operator()(uint64_t x) const{static const uint64_t FIX = sync_clock; return splitmix64(x + FIX);}
-};
-template <typename T,typename V,typename U = int> using u_map = unordered_map<T, V, split64_hash <U>>;
-template <typename T> using orset =  tree<T, null_type, less<T>,  rb_tree_tag,   tree_order_statistics_node_update>;
-template <typename T, typename V> using ormap = tree<T, V, less<T>, rb_tree_tag, tree_order_statistics_node_update>;
-template <typename T> istream& operator>>(istream& is,  vector<T> &a){for (auto &x : a) is >> x;         return is;}
-template <typename T> ostream& operator<<(ostream& os,  vector<T>  a){for (auto &x : a) os << x << ' ';  return os;}
-template <typename T> ostream& operator<<(ostream& os,  set<T>  s){for (auto &x : s) os << x << ' ';     return os;}
-template <typename T> ostream& operator<<(ostream& os,  multiset<T>  s){for (auto &x : s) os << x << ' ';return os;}
-template <typename T, typename V> void operator+=(vector<T>& a, const V value) { for(auto &x : a)x += value; }
-template <typename T, typename V> void operator-=(vector<T>& a, const V value) { for(auto &x : a)x -= value; }
-template <typename T, typename V> void operator*=(vector<T>& a, const V value) { for(auto &x : a)x *= value; }
-template <typename T, typename V> void operator/=(vector<T>& a, const V value) { for(auto &x : a)x /= value; }
-template <typename T> void operator++(vector<T>& a) { a += 1; }
-template <typename T> void operator--(vector<T>& a) { a -= 1; }
-void solve(){
-int n,m;
-cin>>n>>m;
-vector<vector<int>> a( n , vector<int> (m));  
-vector<vector<int>> b( n , vector<int> (m));  
-for(int i=0;i<n;i++)
-{
-    for(int j=0;j<m;j++)
-    {
-        char c;
-        cin>>c;
-        a[i][j]=c-'0';
-    }
-}
-for(int i=0;i<n;i++)
-{
-    for(int j=0;j<m;j++)
-    {
-        char c;
-        cin>>c;
-        b[i][j]=c-'0';
-    }
-}
-for(int i=0;i<n;i++)
-{   
-    int sum_a=0,sum_b=0;
 
-    for(int j=0;j<m;j++)
-    {
-        sum_a+=a[i][j];
-        sum_b+=b[i][j];
-    }
-    sum_a%=3;
-    sum_b%=3;
-    if(sum_a!=sum_b)
-    {
-        cout<<"NO"<<endl;
-        return;
-    }
-}
-for(int j=0;j<m;j++)
-{   
-    int sum_a=0,sum_b=0;
+void solve() {
+    int n, m;
+    cin >> n >> m;
 
-    for(int i=0;i<n;i++)
-    {
-        sum_a+=a[i][j];
-        sum_b+=b[i][j];
+    vector<vector<int>> a(n, vector<int>(m));
+    vector<vector<int>> b(n, vector<int>(m));
+
+    for (int i = 0; i < n; ++i) {
+        for (int j = 0; j < m; ++j) {
+            char c;
+            cin >> c;
+            a[i][j] = c - '0';
+        }
     }
-    sum_a%=3;
-    sum_b%=3;
-    if(sum_a!=sum_b)
-    {
-        cout<<"NO"<<endl;
-        return;
+
+    for (int i = 0; i < n; ++i) {
+        for (int j = 0; j < m; ++j) {
+            char c;
+            cin >> c;
+            b[i][j] = c - '0';
+        }
     }
+
+    // Apply operations greedily to transform a to b
+    for (int i = 0; i < n - 1; ++i) {
+        for (int j = 0; j < m - 1; ++j) {
+            if (a[i][j] != b[i][j]) {
+                int diff = (b[i][j] - a[i][j] + 3) % 3;
+                a[i][j] = (a[i][j] + diff) % 3;
+                a[i + 1][j] = (a[i + 1][j] + diff) % 3;
+                a[i][j + 1] = (a[i][j + 1] + diff) % 3;
+                a[i + 1][j + 1] = (a[i + 1][j + 1] + diff) % 3;
+            }
+        }
+    }
+
+    // Check if the last row and last column match
+    bool possible = true;
+    for (int i = 0; i < n; ++i) {
+        if (a[i][m - 1] != b[i][m - 1]) {
+            possible = false;
+            break;
+        }
+    }
+    for (int j = 0; j < m; ++j) {
+        if (a[n - 1][j] != b[n - 1][j]) {
+            possible = false;
+            break;
+        }
+    }
+
+    cout << (possible ? "YES" : "NO") << '\n';
 }
 
-cout<<"YES"<<endl;
+int main() {
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
 
-return ;
-}
-bool test=1;
-int main(){
-ios::sync_with_stdio(0);
-cin.tie(0);
-cout.tie(0);
-int term=1;
-if(test)cin>>term;
-while(term--){
-solve();
-}
-return 0;
+    int t;
+    cin >> t;
+    while (t--) {
+        solve();
+    }
+
+    return 0;
 }

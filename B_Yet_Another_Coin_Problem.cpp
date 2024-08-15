@@ -29,30 +29,8 @@ template <typename T> void operator++(vector<T>& a) { a += 1; }
 template <typename T> void operator--(vector<T>& a) { a -= 1; }
 void solve(){
 
-int a[]={1,3,6,10,15};
-
-int n;
-cin>>n;
-int ans=0;
 
 
-for(int i=4;i>=0;i--)
-{
-    while(n>0)
-    {
-        if(n>=a[i])
-        {
-            n-=a[i];
-            ans++;
-        }
-        else
-        {
-            break;
-        }
-    }
-}
-
-cout<<ans<<endl;
 return ;
 }
 bool test=1;

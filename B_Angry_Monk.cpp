@@ -30,53 +30,29 @@ template <typename T> void operator--(vector<T>& a) { a -= 1; }
 void solve(){
 
 
-ll n,k,x;
-cin>>n>>k>>x;
-vector<ll>a(n);
-
+ll n,k;
+cin>>n>>k;
+vector<ll>a(k);
 cin>>a;
 
-sort(a.begin(),a.end());
+sort(all(a));
+ll ones=count(a.begin(),a.end()-1,1);
 
-int count_MTX=0;
+ll ans=0;
 
-vector<ll>ans;
-for(int i=1;i<n;i++)
-{   ll d=a[i]-a[i-1];
-    if(d>x)
-    {
-        ans.push_back(d);
-    }
-}
-
-sort(ans.begin(),ans.end());
-ll i;
-for( i=0;i<ans.size();i++)
+for(int i=0;i<k-1;i++)
 {
-    ll need=((ans[i]-1)/x);
-    if(need<=k)
+    if(a[i]!=1)
     {
-        k-=need;
-    }
-    else{
-        i--;
-        break;
+        ll op=(a[i]-1)*2;
+        op++;
+        ans+=op;
     }
 }
-
-if(i==a.size()-1)
-{
-    cout<<1<<endl;
-    return;
-}
-
-cout<<maxl(ans.size()-i,1)<<endl;
-
-
-
+cout<<ans+ones<<endl;
 return ;
 }
-bool test=0;
+bool test=1;
 int main(){
 ios::sync_with_stdio(0);
 cin.tie(0);
