@@ -40,14 +40,14 @@ for(ll i=0;i<n-k+1;i++)
 }
 
 vector<ll>p;
-for(ll i=0;i<n;i++)
-{
-    for(ll j=0;j<m;j++)
-    {
-        cout<<grid[i][j]<<" ";
-    }
-    cout<<endl;
-}
+// for(ll i=0;i<n;i++)
+// {
+//     for(ll j=0;j<m;j++)
+//     {
+//         cout<<grid[i][j]<<" ";
+//     }
+//     cout<<endl;
+// }
 for(ll i=0;i<n;i++)
 {
     for(ll j=0;j<m;j++)
@@ -57,57 +57,14 @@ for(ll i=0;i<n;i++)
 }
 
 
-vector<int>t;
-
-for(int i=0;i<(n-k-k+2)*(m-k-k+2);i++)
-{
-    t.push_back(k*k);
-}
-for(int j=k-1;j>=1;j--)
-{
-    for(int i=0;i<(m-k-k+2);i++)
-    {
-        t.push_back(j*k);
-        t.push_back(j*k);
-    }
-}
-for(int j=k-1;j>=1;j--)
-{
-    for(int i=0;i<(n-k-k+2);i++)
-    {
-        t.push_back(j*k);
-        t.push_back(j*k);
-    }
-}
-
-
-for(int a=0;a<4;a++)
-{
-    
-    for(int i=1;i<=k-1;i++)
-    {
-        for(int j=1;j<=k-1;j++)
-        {
-            t.push_back(i*j);
-        }
-    }
-}
-
 sort(a.begin(),a.end(),greater<ll>());
 sort(p.begin(),p.end(),greater<ll>());
-sort(t.begin(),t.end(),greater<ll>());
 
-for(ll i=0;i<n*m;i++)
-{
-    cout<<p[i]<<" ";
-}
-cout<<endl;
-for(ll i=0;i<n*m;i++)
-{
-    cout<<t[i]<<" ";
-}
-cout<<endl;
-
+// for(ll i=0;i<n*m;i++)
+// {
+//     cout<<p[i]<<" ";
+// }
+// cout<<endl;
 
 ll ans=0;
 
