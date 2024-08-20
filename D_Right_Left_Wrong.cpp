@@ -8,6 +8,8 @@ using namespace std;
 #define   MAX1   10000008
 #define   mem(a,v)   memset(a,v,sizeof(a))
 #define   lcm(a, b)        ((a)*((b)/__gcd(a,b)))
+#define debug(x) cout<<#x<<" "<<x<<endl;
+void _print(vector<int>a){ cout<<'[ ';for(auto x:a)cout<<x<<" ";cout<<' ]';}
 void solve() {
     ll n;
     cin >> n;
@@ -22,7 +24,7 @@ void solve() {
 
     string s;
     cin >> s;
-
+    debug(s);
     ll ans = 0;
     ll l = 0, r = n - 1;
 
