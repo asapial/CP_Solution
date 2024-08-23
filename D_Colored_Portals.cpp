@@ -7,113 +7,80 @@ using namespace std;
 #define   MAX    500006
 #define   MAX1   10000008
 #define   mem(a,v)   memset(a,v,sizeof(a))
-#define debug(x) cout<<#x<<" "<<x<<endl;
 #define   lcm(a, b)        ((a)*((b)/__gcd(a,b)))
-bool path(string a, string b)
-{
-    if(a[0]==b[0]) return true;
-    if(a[0]==b[1]) return true;
-    if(a[1]==b[0]) return true;
-    if(a[1]==b[1]) return true;
-    return false;
+
+bool two_check(string a, string b) {
+    return a[0] == b[0] || a[0] == b[1] || a[1] == b[0] || a[1] == b[1];
+}
+ 
+bool three_check(string s, string e, string m) {
+    return (s[0] == m[0] && e[0] == m[1]) || 
+           (s[0] == m[0] && e[1] == m[1]) || 
+           (s[1] == m[0] && e[0] == m[1]) || 
+           (s[1] == m[0] && e[1] == m[1]) || 
+           (s[0] == m[1] && e[0] == m[0]) || 
+           (s[0] == m[1] && e[1] == m[0]) || 
+           (s[1] == m[1] && e[0] == m[0]) || 
+           (s[1] == m[1] && e[1] == m[0]);
 }
 void solve(){
 
-ll n,m;
-cin>>n>>m;
+int n,k;
+cin>>n>>k;
 
+string v[]={"BG", "BR", "BY", "GR", "GY","RY"};
 string s[n];
 
-for(ll i=0;i<n;i++)
+map<string,vector<int>>m;
+
+for(int i=0;i<n;i++)
 {
-    cin>>s[i];
+  cin>>s[i];
+  m[s[i]].push_back(i);
 }
 
-while(m--)
+
+while(k--)
 {
-    ll l,r;
-    cin>>l>>r;
+  int l,r;
+  cin>>l>>r;
+  l--;
+  r--;
+  if(l==r)
+  {
+    cout<<0<<endl;
+    continue;
+  }
 
-    if(l==r)
+  if(two_check(s[l],s[r]))
+  {
+    cout<<abs(l-r)<<endl;
+    continue;
+  }
+  if(l>r)swap(l,r);
+  int ans=INT_MAX;
+  for(int i=0;i<6;i++)
+  { string c=v[i];
+    if(c!=s[l] and c!=s[r] and three_check(s[l],s[r],c))
     {
-        cout<<0<<endl;
-        continue;
-    }
-
-    if(l>r)
-    {
-        swap(l,r);
-    }
-
-    bool check1=true,check2=true;
-    ll ans1=0,ans2=0;
-
-
-    for(ll i=l-1;i<=r-2;i++)
-    {
-        if(!path(s[i],s[i+1]))
+        auto it=upper_bound(m[c].begin(),m[c].end(),l)-m[c].begin();
+        if(it<m[c].size())
         {
-            check1=false;
-            break;
+          ans=min(ans,abs(l-m[c][it])+abs(r-m[c][it]));
         }
-        
-    }
 
-    ans1+=(r-l);
-    
-    for(ll i=r-1;i<=n-2;i++)
-    {
-        if(!path(s[i],s[i+1]))
+        if(it>0)
         {
-            check2&=false;
-            break;
+          it--;
+          ans=min(ans,abs(l-m[c][it])+abs(r-m[c][it]));
         }
-        
     }
+  }
 
-    if(!path(s[1],s[n-1]))
-    {
-            check2&=false;
-            break;
-    }
-
-    for(ll i=0;i<=l-2;i++)
-    {
-        if(!path(s[i],s[i+1]))
-        {
-            check2&=false;
-            break;
-        }
-        
-    }
-
-    ans2+=(n-r);
-    ans2+=(n-1);
-    ans2+=(l-1);
-
-    ll ans=LLONG_MAX;
-
-    if(check1)
-    {
-        ans=min(ans,ans1);
-    }
-    if(check2)
-    {
-        ans=min(ans,ans2);
-    }
-
-    if(ans==LLONG_MAX)
-    {
-        cout<<-1<<endl;
-        continue;
-    }
-
-    debug(ans1);
-    debug(ans2);
-    debug(ans);
-    cout<<ans<<endl;
-
+  cout<<(ans==INT_MAX?-1:ans)<<endl;
 }
+
+
 }
 
 bool test=1;
@@ -123,13 +90,10 @@ cin.tie(0);
 cout.tie(0);
 // freopen("input.txt", "r",stdin);
 // freopen("output.txt", "w",stdout);
-ll term=1;
+int term=1;
 if(test)cin>>term;
 while(term--){
 solve();
 }
 return 0;
 }
-
-
-
