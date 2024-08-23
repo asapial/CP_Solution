@@ -8,54 +8,58 @@ using namespace std;
 #define   MAX1   10000008
 #define   mem(a,v)   memset(a,v,sizeof(a))
 #define   lcm(a, b)        ((a)*((b)/__gcd(a,b)))
-#define debug(x) cout<<#x<<" "<<x<<endl;
 int q(int a,int b)
 {
     cout<<"? "<<a<<" "<<b<<endl;
-    fflush(stdout);
     int num;
     cin>>num;
-    return --num;
+    return num;
 }
 void solve(){
 
 int n;
 cin>>n;
 
-vector<int>a(n+1,-1);
+vector<pair<int,int>>ans;
 
-
-
-for(int i=1;i<=n;i++)
+for(int i=2;i<=n;i++)
 {
     int mid=1;
-
-    do
+    while(true)
     {
         int x=q(i,mid);
-        if(x==i) 
+        if(x==i)
         {
+            ans.push_back({i,mid});
             break;
         }
-        mid=x;
-    }while(true);
-    a[i]=mid;
+        else
+        {
+            mid=x;
+        }
+    }
 }
 
 cout<<"! ";
-for(int i=1;i<=n;i++)
+for(auto x:ans)
 {
-    cout<<a[i]<<" "<<i+1<<" ";
+    cout<<x.first<<" "<<x.second<<" ";
 }
 cout<<endl;
 }
 
+bool test=1;
 int main(){
-
-int t;
-cin>>t;
-while(t--){
+ios::sync_with_stdio(0);
+cin.tie(0);
+cout.tie(0);
+// freopen("input.txt", "r",stdin);
+// freopen("output.txt", "w",stdout);
+int term=1;
+if(test)cin>>term;
+while(term--){
 solve();
 }
 return 0;
 }
+
