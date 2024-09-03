@@ -11,21 +11,15 @@ using namespace std;
 void solve(){
 
 
-ll x,y,k;
-cin>>x>>y>>k;
+int a,b;
+cin>>a>>b;
 
-ll ans=max(ceil(x/(k*1.0)),ceil(y/(k*1.0)));
 
-if(ceil(x/(k*1.0))==ceil(y/(k*1.0)))
+int ans=INT_MAX;
+
+for(int i=a;i<=b;i++)
 {
-    cout<<ans*2<<endl;
-    return;
-}
-ans*=2;
-
-if(ans%2==0)
-{
-    ans--;
+    ans=min(ans,(i-a)+(b-i));
 }
 cout<<ans<<endl;
 }

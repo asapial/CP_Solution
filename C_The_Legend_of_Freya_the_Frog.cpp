@@ -23,7 +23,7 @@ if(ceil(x/(k*1.0))==ceil(y/(k*1.0)))
 }
 ans*=2;
 
-if(ans%2==0)
+if(ceil(x/(k*1.0))>ceil(y/(k*1.0)))
 {
     ans--;
 }
