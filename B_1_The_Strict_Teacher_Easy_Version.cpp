@@ -8,44 +8,33 @@ using namespace std;
 #define   MAX1   10000008
 #define   mem(a,v)   memset(a,v,sizeof(a))
 #define   lcm(a, b)        ((a)*((b)/__gcd(a,b)))
-ll mod=1e9+7;
-ll bigMod(ll base, ll power)
-{
-    if(power==0) return 1;
-
-    if(power%2)
-    {
-        return (bigMod(base,power-1)*base)%mod;
-    }
-    else
-    {
-        ll res=bigMod(base,power/2)%mod;
-        return (res*res)%mod;
-    }
-    
-}
 void solve(){
 
+int n,m,q;
+cin>>n>>m>>q;
+vector<int>a(2);
+cin>>a[0]>>a[1];
+int now;
+cin>>now;
 
-ll n;
-cin>>n;
-vector<ll>a(n);
+sort(a.begin(),a.end());
 
-ll sum=0;
-ll ans=0;
-for(int i=0;i<n;i++)
+if(a[1]<now)
 {
-    cin>>a[i];
-    ans = (ans + (sum * a[i]) % mod) % mod;
-    sum = (sum + a[i]) % mod;
+    cout<<n-a[1]<<endl;
+    return;
+}
+else if(now<a[0])
+{
+    cout<<a[0]-1<<endl;
+    return;
+}
+else if(a[0]<=now and now<=a[1])
+{
+    cout<<(a[1]-a[0])/2<<endl;
+    return;
 }
 
-ll y = (n * (n - 1)) % mod;
-y = (y * bigMod(2, mod - 2)) % mod; 
-
-ans = (ans * bigMod(y, mod - 2)) % mod;
-
-cout<<ans<<endl;
 }
 
 bool test=1;

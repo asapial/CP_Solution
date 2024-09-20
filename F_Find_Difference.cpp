@@ -12,38 +12,49 @@ void solve(){
 
 int n;
 cin>>n;
-int x,y;
+string a,b;
+cin>>a>>b;
 
 
-map<pair<int,int>,int>mp;
+vector<vector<int>>aa(26,vector<int>(n,0));
+vector<vector<int>>bb(26,vector<int>(n,0));
+
 
 for(int i=0;i<n;i++)
 {
-    cin>>x>>y;
-    mp[{x,y}]++;
+    aa[a[i]-'a'][i]=1;
+    bb[b[i]-'a'][i]=1;
 }
 
-ll ans=0;
-for(int i=0;i<=n;i++)
+for(int i=0;i<26;i++)
 {
-    if(mp[{i,0}] and mp[{i,1}])
+    for(int j=1;j<n;j++)
     {
-        ans+=n-2;
+        aa[i][j]+=aa[i][j-1];
+        bb[i][j]+=bb[i][j-1];
     }
-    if(mp[{i,0}] and mp[{i-1,1}] and mp[{i+1,1}])
-    {
-        ans++;
-    }
-    if(mp[{i,1}] and mp[{i-1,0}] and mp[{i+1,0}])
-    {
-        ans++;
-    }
-
-}
-cout<<ans<<endl;
 }
 
-bool test=1;
+int q;
+cin>>q;
+while(q--)
+{
+    int l,r;
+    cin>>l>>r;
+    l--;r--;
+    int ans=0;
+    for(int i=0;i<26;i++)
+    {
+        int s=(aa[i][r]-(l==0?0:aa[i][l-1]));
+        int t=(bb[i][r]-(l==0?0:bb[i][l-1]));
+        ans+=abs(s-t);
+
+    }
+    cout<<ans<<endl;
+}
+}
+
+bool test=0;
 int main(){
 ios::sync_with_stdio(0);
 cin.tie(0);

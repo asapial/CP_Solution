@@ -8,44 +8,27 @@ using namespace std;
 #define   MAX1   10000008
 #define   mem(a,v)   memset(a,v,sizeof(a))
 #define   lcm(a, b)        ((a)*((b)/__gcd(a,b)))
-ll mod=1e9+7;
-ll bigMod(ll base, ll power)
-{
-    if(power==0) return 1;
-
-    if(power%2)
-    {
-        return (bigMod(base,power-1)*base)%mod;
-    }
-    else
-    {
-        ll res=bigMod(base,power/2)%mod;
-        return (res*res)%mod;
-    }
-    
-}
 void solve(){
 
 
-ll n;
+int n;
 cin>>n;
-vector<ll>a(n);
+string s="aeiou";
 
-ll sum=0;
-ll ans=0;
-for(int i=0;i<n;i++)
+
+vector<int>ans(5,n/5);
+
+for(int i=0;i<n%5;i++)
 {
-    cin>>a[i];
-    ans = (ans + (sum * a[i]) % mod) % mod;
-    sum = (sum + a[i]) % mod;
+    ans[i]++;
 }
 
-ll y = (n * (n - 1)) % mod;
-y = (y * bigMod(2, mod - 2)) % mod; 
+for(int i=0;i<5;i++)
+{
+    while(ans[i]--)cout<<s[i];
+}
+cout<<endl;
 
-ans = (ans * bigMod(y, mod - 2)) % mod;
-
-cout<<ans<<endl;
 }
 
 bool test=1;
