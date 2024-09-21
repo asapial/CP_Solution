@@ -1,46 +1,55 @@
-#include <bits/stdc++.h>
+
+
+
+#include <iostream>
+#include <string>
+#include <vector>
+
 using namespace std;
-#define   Pi     2*acos(0.0)
-#define   ll     long long
-#define   pb     push_back
-#define   mp     make_pair
-#define   MAX    500006
-#define   MAX1   10000008
-#define   mem(a,v)   memset(a,v,sizeof(a))
-#define   lcm(a, b)        ((a)*((b)/__gcd(a,b)))
-void solve(){
 
-
-ll x,y,k;
-cin>>x>>y>>k;
-
-ll ans=max(ceil(x/(k*1.0)),ceil(y/(k*1.0)));
-
-if(ceil(x/(k*1.0))==ceil(y/(k*1.0)))
-{
-    cout<<ans*2<<endl;
-    return;
-}
-ans*=2;
-
-if(ans%2==0)
-{
-    ans--;
-}
-cout<<ans<<endl;
+int query(const string& t) {
+    cout << "? " << t << endl;
+    cout.flush();  // Flush the output buffer
+    int response;
+    cin >> response;
+    return response;
 }
 
-bool test=1;
-int main(){
-ios::sync_with_stdio(0);
-cin.tie(0);
-cout.tie(0);
-// freopen("input.txt", "r",stdin);
-// freopen("output.txt", "w",stdout);
-int term=1;
-if(test)cin>>term;
-while(term--){
-solve();
+void solve() {
+    int t;
+    cin >> t;
+
+    while (t--) {
+        int n;
+        cin >> n;
+
+        string password="";  // Initialize the password string
+        
+        // First, check for single characters
+        int hasZero = query("0");
+        //int hasOne = query("1");
+
+        // Set the first character
+        password[0] = hasZero ? '0' : '1';
+
+        // Build the password by querying substrings
+        for (int i = 1; i < n; i++) {
+            string prefix = password.substr(0, i);
+            // Check if appending '0' or '1' gives a valid substring
+            if (query(prefix + "0")) {
+                password[i] = '0';
+            } else {
+                password[i] = '1';
+            }
+        }
+
+        // Output the final password
+        cout << "! " << password << endl;
+        cout.flush();  // Flush the output buffer
+    }
 }
-return 0;
+
+int main() {
+    solve();
+    return 0;
 }
