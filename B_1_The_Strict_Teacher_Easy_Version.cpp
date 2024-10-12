@@ -10,16 +10,31 @@ using namespace std;
 #define   lcm(a, b)        ((a)*((b)/__gcd(a,b)))
 void solve(){
 
-int n,m;
-cin>>n>>m;
+int n,m,q;
+cin>>n>>m>>q;
+vector<int>a(2);
+cin>>a[0]>>a[1];
+int now;
+cin>>now;
 
-int ans=max(0,n-m);
+sort(a.begin(),a.end());
 
-while(ans<m+n)
+if(a[1]<now)
 {
-    ans|=ans+1;
+    cout<<n-a[1]<<endl;
+    return;
 }
-cout<<ans<<endl;
+else if(now<a[0])
+{
+    cout<<a[0]-1<<endl;
+    return;
+}
+else if(a[0]<=now and now<=a[1])
+{
+    cout<<(a[1]-a[0])/2<<endl;
+    return;
+}
+
 }
 
 bool test=1;

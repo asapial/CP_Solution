@@ -10,14 +10,22 @@ using namespace std;
 #define   lcm(a, b)        ((a)*((b)/__gcd(a,b)))
 void solve(){
 
-int n,m;
-cin>>n>>m;
 
-int ans=max(0,n-m);
+ll x,y,k;
+cin>>x>>y>>k;
 
-while(ans<m+n)
+ll ans=max(ceil(x/(k*1.0)),ceil(y/(k*1.0)));
+
+if(ceil(x/(k*1.0))==ceil(y/(k*1.0)))
 {
-    ans|=ans+1;
+    cout<<ans*2<<endl;
+    return;
+}
+ans*=2;
+
+if(ceil(x/(k*1.0))>ceil(y/(k*1.0)))
+{
+    ans--;
 }
 cout<<ans<<endl;
 }

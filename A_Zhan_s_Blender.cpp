@@ -10,16 +10,10 @@ using namespace std;
 #define   lcm(a, b)        ((a)*((b)/__gcd(a,b)))
 void solve(){
 
-int n,m;
-cin>>n>>m;
+ll n,x,y;
+cin>>n>>x>>y;
 
-int ans=max(0,n-m);
-
-while(ans<m+n)
-{
-    ans|=ans+1;
-}
-cout<<ans<<endl;
+cout<<(n+min(x,y)-1)/(min(x,y))<<endl;
 }
 
 bool test=1;

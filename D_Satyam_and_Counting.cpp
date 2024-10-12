@@ -10,14 +10,35 @@ using namespace std;
 #define   lcm(a, b)        ((a)*((b)/__gcd(a,b)))
 void solve(){
 
-int n,m;
-cin>>n>>m;
+int n;
+cin>>n;
+int x,y;
 
-int ans=max(0,n-m);
 
-while(ans<m+n)
+map<pair<int,int>,int>mp;
+
+for(int i=0;i<n;i++)
 {
-    ans|=ans+1;
+    cin>>x>>y;
+    mp[{x,y}]++;
+}
+
+ll ans=0;
+for(int i=0;i<=n;i++)
+{
+    if(mp[{i,0}] and mp[{i,1}])
+    {
+        ans+=n-2;
+    }
+    if(mp[{i,0}] and mp[{i-1,1}] and mp[{i+1,1}])
+    {
+        ans++;
+    }
+    if(mp[{i,1}] and mp[{i-1,0}] and mp[{i+1,0}])
+    {
+        ans++;
+    }
+
 }
 cout<<ans<<endl;
 }
