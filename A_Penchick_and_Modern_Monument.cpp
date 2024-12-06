@@ -10,7 +10,20 @@ using namespace std;
 #define   lcm(a, b)        ((a)*((b)/__gcd(a,b)))
 void solve(){
 
+int n;
+cin>>n;
+vector<int>a(n);
+for(int i=0;i<n;i++)cin>>a[i];
 
+        int mx = 0;
+        for (int i=0;i<n;i++) {
+            int cnt = 0;
+            for (int j=0;j<n;j++) {
+                if (a[j]==a[i]) cnt++;
+            }
+            mx = max(mx,cnt);
+        }
+        cout<<n-mx<<endl;
 }
 
 bool test=1;
