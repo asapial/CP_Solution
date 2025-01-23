@@ -10,19 +10,18 @@ using namespace std;
 #define   lcm(a, b)        ((a)*((b)/__gcd(a,b)))
 void solve(){
 
-ll s, p, u;
-cin >> s >> p >> u;
-ll need = (3 - p % 3) % 3;
-if (p > 0 && need > u) {
-    cout << -1<<endl;
-    return;
+int n;
+cin >> n;
+int x = n;
+int cnt = 0;
+int dig = 0;
+while(x){
+    dig = x;
+    x/=10;
+    cnt++;
 }
-
-u -= need;
-p += need;
-
-ll mn = s + u / 3 + (u % 3 + 1) / 2 + p / 3;
-cout << mn << endl;
+int ans = 9*(cnt-1)+dig;
+cout << ans <<endl;
 
 }
 

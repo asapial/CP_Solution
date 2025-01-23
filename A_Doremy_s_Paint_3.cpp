@@ -10,20 +10,22 @@ using namespace std;
 #define   lcm(a, b)        ((a)*((b)/__gcd(a,b)))
 void solve(){
 
-ll s, p, u;
-cin >> s >> p >> u;
-ll need = (3 - p % 3) % 3;
-if (p > 0 && need > u) {
-    cout << -1<<endl;
-    return;
+ int n;
+cin >> n;
+map<int, int> m;
+for (int i = 1; i <= n; ++i) {
+    int x;
+    cin >> x;
+    m[x]++;
 }
-
-u -= need;
-p += need;
-
-ll mn = s + u / 3 + (u % 3 + 1) / 2 + p / 3;
-cout << mn << endl;
-
+if (m.size() >= 3) 
+    puts("No");
+else {
+    if (abs(m.begin()->second - m.rbegin()->second) <= 1) 
+        puts("Yes");
+    else 
+        puts("No");
+}
 }
 
 bool test=1;

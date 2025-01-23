@@ -9,20 +9,18 @@ using namespace std;
 #define   mem(a,v)   memset(a,v,sizeof(a))
 #define   lcm(a, b)        ((a)*((b)/__gcd(a,b)))
 void solve(){
-
-ll s, p, u;
-cin >> s >> p >> u;
-ll need = (3 - p % 3) % 3;
-if (p > 0 && need > u) {
-    cout << -1<<endl;
-    return;
+int n;
+cin>>n;
+vector<int>a(n);
+int s=0,c=0;
+for(int i=1;i<=n;i++){
+    cin>>a[i];
+    s+=a[i];
+    if(a[i]==-1)c++;
 }
-
-u -= need;
-p += need;
-
-ll mn = s + u / 3 + (u % 3 + 1) / 2 + p / 3;
-cout << mn << endl;
+int x=s<0?((-s+1)>>1):0;
+if((c&1)^(x&1))++x;
+cout<<x<<endl;
 
 }
 
