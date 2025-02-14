@@ -9,21 +9,21 @@ using namespace std;
 #define   mem(a,v)   memset(a,v,sizeof(a))
 #define   lcm(a, b)        ((a)*((b)/__gcd(a,b)))
 void solve(){
- 
-int n,p=0;
-cin>>n;
-if(n==1){int a; cin>>a;cout<<a<<endl;}
-else{
-for(int i=0; i<n; i++){
-    int a;
-    cin>>a;
-    p=(p^a);
+int n,x;
+cin >> n;
+int ans = 0;
+for (int i = 0; i < n; ++i) {
+    cin >> x;
+    if (x != 0) {
+    int loc = 0;
+    for (++i; i < n; ++i) {
+        cin >> x;
+        if (x == 1) { ans += loc; loc = 0; }
+        else { ++loc; }
+    }
+    }
 }
-if(n%2!=0){cout<<p<<endl;}
-else{if(p==0)cout<<"0"<<endl;else cout<<"-1"<<endl;}
-}
- 
-
+cout << ans << endl;
 }
 
 bool test=1;

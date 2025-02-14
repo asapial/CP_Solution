@@ -9,20 +9,49 @@ using namespace std;
 #define   mem(a,v)   memset(a,v,sizeof(a))
 #define   lcm(a, b)        ((a)*((b)/__gcd(a,b)))
 void solve(){
- 
-int n,p=0;
+
+ll n;
 cin>>n;
-if(n==1){int a; cin>>a;cout<<a<<endl;}
-else{
-for(int i=0; i<n; i++){
-    int a;
-    cin>>a;
-    p=(p^a);
+map<ll,ll>a,b;
+
+ll num;
+
+for(ll i=0;i<n;i++)
+{
+    cin>>num;
+    a[num]++;
 }
-if(n%2!=0){cout<<p<<endl;}
-else{if(p==0)cout<<"0"<<endl;else cout<<"-1"<<endl;}
+for(ll i=0;i<n;i++)
+{
+    cin>>num;
+    b[num]++;
 }
- 
+
+if(a.size()>=3 or b.size()>=3)
+{
+    cout<<"YES"<<endl;
+    return;
+}
+
+set<ll>s;
+
+for(auto x:a)
+{
+    for(auto y:b)
+    {
+        s.insert(x.first+y.first);
+    }
+}
+
+if(s.size()>=3)
+{
+    cout<<"YES"<<endl;
+}
+else
+{
+    cout<<"NO"<<endl;
+}
+
 
 }
 
@@ -33,7 +62,7 @@ cin.tie(0);
 cout.tie(0);
 // freopen("input.txt", "r",stdin);
 // freopen("output.txt", "w",stdout);
-int term=1;
+ll term=1;
 if(test)cin>>term;
 while(term--){
 solve();

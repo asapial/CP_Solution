@@ -9,24 +9,24 @@ using namespace std;
 #define   mem(a,v)   memset(a,v,sizeof(a))
 #define   lcm(a, b)        ((a)*((b)/__gcd(a,b)))
 void solve(){
- 
-int n,p=0;
+
+int n, m, maxx = 0, maxy = 0;
 cin>>n;
-if(n==1){int a; cin>>a;cout<<a<<endl;}
-else{
-for(int i=0; i<n; i++){
-    int a;
-    cin>>a;
-    p=(p^a);
+int x;
+for(int i = 0; i < n; i++){
+    cin>>x;
+    maxx = x > maxx ? x : maxx;
 }
-if(n%2!=0){cout<<p<<endl;}
-else{if(p==0)cout<<"0"<<endl;else cout<<"-1"<<endl;}
+cin>>m;
+for(int i = 0; i < m; i++){
+    cin>>x;
+    maxy = x > maxy ? x : maxy;
 }
- 
+cout<<maxx<<" "<<maxy<<endl;
 
 }
 
-bool test=1;
+bool test=0;
 int main(){
 ios::sync_with_stdio(0);
 cin.tie(0);
